@@ -10,14 +10,14 @@ def get_lines():
 
 # clean paragraphs
 def clean_paragraphs(text): 
-    return [line.replace('\n', '') for line in text]
+    return ''.join([line.replace('\n', '') for line in text])
     
 # compare sentece
 def compare_sentences(line_1, line_2):
     same_lines = set(line_1) & set(line_2)
     diff_lines = set(line_1) ^ set(line_2)
     
-    return [same_lines, diff_lines] 
+    return [same_lines, diff_lines]
 
 # write to files function
 def write_to_files(output_file, lines):
@@ -25,5 +25,6 @@ def write_to_files(output_file, lines):
         output.writelines(sorted(lines))
 # main
 if __name__ == "__main__":
+    print(compare_sentences('My mate. Hello.', 'My no mate.Hello'))
     write_to_files('output/same.txt',compare_sentences(get_lines()[0], get_lines()[1])[0])
     write_to_files('output/diff.txt',compare_sentences(get_lines()[0], get_lines()[1])[1])
